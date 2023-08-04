@@ -16,6 +16,8 @@
 
 (deflisten battery "sofia-eww battery")
 
+(deflisten workspaces "sofia-eww workspace")
+
 (defpoll time :interval "10s" "date '+%H:%M'")
 
 (defwidget time []
@@ -24,8 +26,11 @@
 (defwidget battery []
   (literal :content battery))
 
+(defwidget workspaces []
+  (literal :content workspaces))
+
 (defwidget items []
-  (box :class "items" (battery) (time)))
+  (box :class "items" :space-evenly false (workspaces) (battery) (time)))
 
 (defwidget bar []
   (box :class "bar" :orientation "h"

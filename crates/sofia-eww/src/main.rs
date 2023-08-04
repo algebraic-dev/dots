@@ -5,13 +5,14 @@
 //!
 
 pub mod battery;
+pub mod workspaces;
 
 pub use battery::battery;
+pub use workspaces::workspaces;
 
-use std::str::FromStr;
+use std::{io, str::FromStr};
 
 use clap::Parser;
-use smol::io;
 
 /// Widget to display
 #[derive(Clone)]
@@ -38,16 +39,13 @@ struct WidgetsCli {
     widget: String,
 }
 
-fn main() -> io::Result<()> {
-    smol::block_on(async {
-        let widgets = WidgetsCli::parse();
+#[tokio::main]
+async fn main() -> io::Result<()> {
+    let widgets = WidgetsCli::parse();
 
-        match widgets.widget.parse::<Widget>() {
-            Ok(Widget::Workspace) => {
-                todo!()
-            }
-            Ok(Widget::Battery) => battery().await,
-            Err(e) => Err(io::Error::new(io::ErrorKind::Other, e)),
-        }
-    })
+    match widgets.widget.parse::<Widget>() {
+        Ok(Widget::Workspace) => workspaces().await,
+        Ok(Widget::Battery) => battery().await,
+        Err(e) => Err(io::Error::new(io::ErrorKind::Other, e)),
+    }
 }

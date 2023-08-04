@@ -1,9 +1,8 @@
 //! The battery widget.
 
-use async_io::Timer;
 use notify_rust::Notification;
-use smol::io;
 use std::time::Duration;
+use tokio::{io, time::sleep};
 
 pub async fn battery() -> io::Result<()> {
     let mut alerted = false;
@@ -21,7 +20,7 @@ pub async fn battery() -> io::Result<()> {
             alerted = false;
         }
 
-        sleep(10).await;
+        sleep(Duration::from_secs(10)).await;
     }
 }
 
@@ -47,8 +46,4 @@ fn get_battery_class(parsed: u8) -> &'static str {
         31..=99 => "battery-high",
         _ => "battery-full",
     }
-}
-
-fn sleep(secs: u64) -> Timer {
-    Timer::after(Duration::from_secs(secs))
 }

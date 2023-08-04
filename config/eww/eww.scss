@@ -40,5 +40,20 @@
 }
 
 .battery-full {
-  background-color: #a5ff9e;
+  background-color: #b0ff9e;
+}
+
+.workspaces {
+  background-color: #91adff;
+}
+
+.workspace {
+  padding: 0px 2px;
+  margin: 0px 2px;
+  border-radius: 3px;
+
+}
+
+.active {
+  background: #7e99ea;
 }
