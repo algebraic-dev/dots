@@ -2,7 +2,9 @@
 //! the dotfiles in the repository :). I like the way it works because it's simple and focused on a
 //! single place.
 
-use std::path::PathBuf;
+use std::{io::Error, path::PathBuf};
+
+use yansi::Paint;
 
 /// All the paths used in this script.
 mod paths {
@@ -42,7 +44,24 @@ impl PathExt for PathBuf {
 
 /// Create a symbolic link.
 pub fn link(from: PathBuf, to: PathBuf) {
-    std::os::unix::fs::symlink(from, to).expect("Cannot link");
+    println!(
+        "     {} {:?} to {:?}",
+        Paint::green("Linking").bold(),
+        from,
+        to
+    );
+
+    if to.exists() {
+        if to.is_file() {
+            std::fs::remove_file(&to).unwrap();
+        } else if to.is_dir() {
+            std::fs::remove_dir_all(&to).unwrap();
+        } else {
+            panic!("Path {:?} is not a file or directory", to);
+        }
+    }
+
+    std::os::unix::fs::symlink(from, to).unwrap()
 }
 
 // Main part
@@ -50,6 +69,8 @@ fn main() {
     let dot_config = paths::config();
     let config = paths::here().with("config");
     let home = paths::home();
+
+    println!();
 
     // .config files
     link(config.with("dunst"), dot_config.with("dunst"));
@@ -62,4 +83,6 @@ fn main() {
 
     // home files
     link(config.with(".zshrc"), home.with(".zshrc"));
+
+    println!("        {} :)\n", Paint::green("Done").bold())
 }
