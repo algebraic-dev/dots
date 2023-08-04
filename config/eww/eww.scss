@@ -27,6 +27,18 @@
   background-color: #ff91c1;
 }
 
-.battery {
+.battery-low {
+  background-color: #f57470;
+}
+
+.battery-medium {
+  background-color: #ffeb91;
+}
+
+.battery-high {
   background-color: #9791ff;
+}
+
+.battery-full {
+  background-color: #a5ff9e;
 }

@@ -14,15 +14,15 @@
   :reserve (struts :distance "20px" :side "top")
   (bar))
 
-(defpoll time :interval "10s" "date '+%H:%M'")
+(deflisten battery "sofia-eww battery")
 
-(defpoll battery :interval "10s" "cat /sys/class/power_supply/BAT1/capacity")
+(defpoll time :interval "10s" "date '+%H:%M'")
 
 (defwidget time []
   (box :class "bar_item clock" "${time}"))
 
 (defwidget battery []
-  (box :class "bar_item battery" "${battery}%"))
+  (literal :content battery))
 
 (defwidget items []
   (box :class "items" (battery) (time)))

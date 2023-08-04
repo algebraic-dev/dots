@@ -1,5 +1,4 @@
 [workspace]
+members = ["crates/sofia-dots", "crates/sofia-eww"]
 
-members = ["crates/sofia-dots"]
-
-workspace.resolver = "2"
+resolver = "2"
