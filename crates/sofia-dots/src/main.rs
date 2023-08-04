@@ -2,7 +2,7 @@
 //! the dotfiles in the repository :). I like the way it works because it's simple and focused on a
 //! single place.
 
-use std::{io::Error, path::PathBuf};
+use std::path::PathBuf;
 
 use yansi::Paint;
 
