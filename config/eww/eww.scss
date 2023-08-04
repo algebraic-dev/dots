@@ -1,0 +1,32 @@
+* {
+  all: unset;
+  font-size: 12px;
+}
+
+.bar {
+  margin: 0px 20px;
+}
+
+.bar .used {
+  color: #fff;
+  background-color: #191919;
+  border-radius: 4px;
+  padding: 7px;
+  border: 2px solid #595959;
+}
+
+.bar_item {
+  padding: 8px 10px;
+  background-color: #ff91c1;
+  border-radius: 5px;
+  color: #691a3c;
+  margin-left: 10px;
+}
+
+.clock {
+  background-color: #ff91c1;
+}
+
+.battery {
+  background-color: #9791ff;
+}
